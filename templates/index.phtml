@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>2do reminder app</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="/JS/main.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>2do</h1>
+    <div>
+        <h2>
+            Remember Shit, Get Ripped
+        </h2>
+    </div>
+    <form method="get" action="/add" class="border border-dark">
+        <div class="form-group">
+            <label for="newTodo"><h1>Add a 2do</h1></label>
+            <input name="newTodo" type="text" class="form-control" id="newTodo" aria-describedby="new todo entry"
+                   placeholder="Hit me with yo needs.">
+            <small id="todoHelp" class="form-text text-muted">By which I mean what can we remember for you.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Yo Wants</button>
+    </form>
+
+    <?php
+    if (isset($todos)) { ?>
+    <form method="get" action="/checkbox" class="border border-dark mt-3">
+        <h1>What you got to do:</h1>
+        <?php foreach ($todos as $k => $todo) { ?>
+            <div class="form-check">
+                <input type="checkbox" name="todo" value="<?= htmlspecialchars($todo['id']) ?>" class="form-check-input"
+                       id="materialChecked<?= $k ?>" aria-label="Checkbox for following text input">
+                <label class="form-check-label"
+                       for="materialChecked<?= $k ?>"><?= htmlspecialchars($todo['todo']) ?></label>
+                <button id="<?= htmlspecialchars($todo['id']) ?>" class="edit">Edit</button>
+            </div>
+        <?php }
+        } else {
+            echo 'Get some goals loser';
+        };
+        ?>
+        <button type="submit" class="btn btn-primary">Complete 2dos</button>
+    </form>
+</div>
+<a href="/complete">See what you've done!</a>
+
+
+</body>
+</html>
